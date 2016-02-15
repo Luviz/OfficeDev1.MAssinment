@@ -1,0 +1,6 @@
+c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\Init.Taxonomi\bin\Debug\Init.Taxonomi.exe.config
+c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\Init.Taxonomi\bin\Debug\Init.Taxonomi.exe
+c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\Init.Taxonomi\bin\Debug\Init.Taxonomi.pdb
+c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\Init.Taxonomi\obj\Debug\Init.Taxonomi.csprojResolveAssemblyReference.cache
+c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\Init.Taxonomi\obj\Debug\Init.Taxonomi.exe
+c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\Init.Taxonomi\obj\Debug\Init.Taxonomi.pdb
