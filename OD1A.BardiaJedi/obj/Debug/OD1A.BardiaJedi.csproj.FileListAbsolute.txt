@@ -1,1 +1,6 @@
 c:\users\bardi\onedrive\dokument\visual studio 2015\Projects\OD1A.BardiaJedi\OD1A.BardiaJedi\bin\Debug\OD1A.BardiaJedi.exe.config
+C:\Users\bardi\OneDrive\Dokument\Visual Studio 2015\Projects\OD1A.BardiaJedi\OD1A.BardiaJedi\bin\Debug\OD1A.BardiaJedi.exe
+C:\Users\bardi\OneDrive\Dokument\Visual Studio 2015\Projects\OD1A.BardiaJedi\OD1A.BardiaJedi\bin\Debug\OD1A.BardiaJedi.pdb
+C:\Users\bardi\OneDrive\Dokument\Visual Studio 2015\Projects\OD1A.BardiaJedi\OD1A.BardiaJedi\obj\Debug\OD1A.BardiaJedi.csprojResolveAssemblyReference.cache
+C:\Users\bardi\OneDrive\Dokument\Visual Studio 2015\Projects\OD1A.BardiaJedi\OD1A.BardiaJedi\obj\Debug\OD1A.BardiaJedi.exe
+C:\Users\bardi\OneDrive\Dokument\Visual Studio 2015\Projects\OD1A.BardiaJedi\OD1A.BardiaJedi\obj\Debug\OD1A.BardiaJedi.pdb
