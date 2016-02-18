@@ -10,6 +10,9 @@ $SiteCollectionTitle = "Mandetory Assinment - Bardia Jedi -"
 $SpURL = "https://Luviz.sharepoint.com/sites/"+$SiteCollectionName
 $SpCred = "LuvizSharePoint"
 
+##Username for taxsonomy admin
+$SpTaxAdmin = "bardiajedi@luviz.onmicrosoft.com"
+
 ##################
 
 
@@ -19,12 +22,17 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 cd $dir #changeing to Scriptes Dirctory
 
-.$dir\test01.ps1 #Debug rem me
 
 #Genrate Site Collection
 .$dir\initSiteCollection.sp1 
 
 
 "Taxonomi"
+"Loging in as " + $SpTaxAdmin
+$pass = Read-Host $SPTaxAdmin "`nPassword" -AsSecureString 
+$unsafePass = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+                [Runtime.InteropServices.Marshal]::SecureStringToBSTR($pass))
+
 #Build Taxonomi
-.$dir\Init.Taxonomi\bin\Debug\Init.Taxonomi.exe $SpURL "World"
+.$dir/Init.Taxonomi/bin/debug/Init.Taxonomi.exe $SpTaxAdmin $unsafepass $SpURL
+

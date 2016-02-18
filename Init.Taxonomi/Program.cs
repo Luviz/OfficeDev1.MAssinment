@@ -13,10 +13,6 @@ namespace Init.Taxonomi {
 	class Program {
 
 		/// <summary>
-		/// args[0] [username] 
-		/// args[1] [unsafePassword]
-		/// args[2] [url]
-		/// 
 		/// ********************
 		/// ***Coments about slitelack of Secureity***
 		/// I had to try it this way toget a handel 
@@ -26,7 +22,11 @@ namespace Init.Taxonomi {
 		/// ** password.AppendChar(Console.ReadKey(true)); **
 		/// 
 		/// </summary>
-		/// <param name="args"></param>
+		/// <param name="args">
+		/// args[0] [username] 
+		/// args[1] [unsafePassword]
+		/// args[2] [url]
+		/// </param>
 		static void Main(string[] args) {
 
 			//Presets
@@ -60,8 +60,9 @@ namespace Init.Taxonomi {
 			var defaultTermStore = tSession.GetDefaultSiteCollectionTermStore();
 			ctx.Load(defaultTermStore, ts => ts.Groups);
 			ctx.ExecuteQuery();
+			Taxonomi.CustomTaxonomi.GenODA1Terms(defaultTermStore);
 			Console.WriteLine("Groups in defaultTermStore:");
-			defaultTermStore.Groups.ToList().ForEach(Console.WriteLine);
+			defaultTermStore.Groups.Select(g => g.Name).ToList().ForEach(Console.WriteLine);
 		}
 
 
