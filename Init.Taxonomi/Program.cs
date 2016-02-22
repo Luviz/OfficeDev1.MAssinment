@@ -14,7 +14,7 @@ namespace Init.Taxonomi {
 
 		/// <summary>
 		/// ********************
-		/// ***Coments about slitelack of Secureity***
+		/// ***Coments about slight lack of Secureity***
 		/// I had to try it this way toget a handel 
 		/// on diffrent ways handleing passwords
 		/// *******************
