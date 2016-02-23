@@ -9,15 +9,6 @@ using OfficeDevPnP.Core.Entities;
 namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 	public class CustomerCT {
 		internal static void CreateCustomerCT(ClientContext ctx) {
-			//[x]3.Title of customer (Using existing title)
-			//[ ]4.Customer Logo(Picture)
-			//[ ]5.Address
-			//[ ]6.Main Contact Person
-			//[ ]7.Office Phone
-			//[ ]8.Mobile Phone
-			//[ ]9.Email
-			//[ ]10.Last Contacted(Date)
-			//[ ]11.Last Order Made(Date, Read Only)V
 
 			//Looking for The Contetype by ID!
 			if (ctx.Web.ContentTypeExistsById(Constants.GUID.CustomerCT.CustomerCTGUID)) {
@@ -27,17 +18,89 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 				ctci.Id = Constants.GUID.CustomerCT.CustomerCTGUID;
 				ctci.Description = "This is the contentype used for Office Devlopment 1 Mandetory Assinment";
 
-				
-				ContentType CustomerCT = ctx.Web.ContentTypes.Add(ctci);
+
+				ContentType customerCT = ctx.Web.ContentTypes.Add(ctci);
 				ctx.ExecuteQueryRetry();
-
-				//FieldCreationInformation CustomerLogo = new FieldCreationInformation(???); //wip
-
-
-
-				//ctx.Web.AddFieldToContentType(CustomerLogo);
-
+				CreateFields(ctx, customerCT);
 			}
+		}
+
+		private static void CreateFields(ClientContext ctx, ContentType customerCT) {
+			#region Customer logo
+			FieldCreationInformation customerLogo = new FieldCreationInformation(FieldType.URL);
+			customerLogo.DisplayName = "Logo";
+			customerLogo.InternalName = "DispLogo";
+			customerLogo.Group = "ODA1";
+			customerLogo.Id = Constants.GUID.CustomerCT.CUSTOMER_LOGO.ToGuid();
+
+			FieldUrl AddedCLOGO = ctx.Web.CreateField<FieldUrl>(customerLogo, false);
+			//AddedCLOGO.DisplayFormat = UrlFieldFormatType.Image;
+			//AddedCLOGO.Update();
+			ctx.ExecuteQuery();
+			ctx.Web.AddFieldToContentType(customerCT, AddedCLOGO);
+			#endregion
+			#region Address
+			FieldCreationInformation address = new FieldCreationInformation(FieldType.Text);
+			address.DisplayName = "Address";
+			address.InternalName = "Address";
+			address.Group = "ODA1"
+		                address.Id = Constants.GUID.CustomerCT.ADDRESS.ToGuid();
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(address));
+			#endregion
+			#region Main Contact Person
+			FieldCreationInformation contactPerson = new FieldCreationInformation(FieldType.Text);
+			contactPerson.DisplayName = "Contact Person";
+			contactPerson.InternalName = "contactPerson";
+			contactPerson.Id = Constants.GUID.CustomerCT.MAIN_CONTACT_PERSON.ToGuid();
+
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(contactPerson));
+			#endregion
+			#region Office Phone
+			FieldCreationInformation phoneOffice = new FieldCreationInformation(FieldType.Text);
+			phoneOffice.DisplayName = "Office Phone";
+			phoneOffice.InternalName = "phoneOffice";
+			phoneOffice.Id = Constants.GUID.CustomerCT.PHONE_OFFICE.ToGuid();
+
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(phoneOffice));
+			#endregion
+			#region Mobile Phone
+			FieldCreationInformation phoneMobile = new FieldCreationInformation(FieldType.Text);
+			phoneOffice.DisplayName = "Mobile";
+			phoneOffice.InternalName = "phoneMobile";
+			phoneOffice.Id = Constants.GUID.CustomerCT.PHONE_MOBILE.ToGuid();
+
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(phoneOffice));
+			#endregion
+			#region Email
+			FieldCreationInformation email = new FieldCreationInformation(FieldType.Text);
+			email.DisplayName = "E-Mail";
+			email.InternalName = "Email";
+			email.Id = Constants.GUID.CustomerCT.EMAIL.ToGuid();
+
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(email));
+			#endregion
+			#region Last Contacted (Date)
+			FieldCreationInformation lastContacted = new FieldCreationInformation(FieldType.DateTime);
+			lastContacted.DisplayName = "Last Contacted";
+			lastContacted.InternalName = "LastContacted";
+			lastContacted.Id = Constants.GUID.CustomerCT.LAST_CONTACTED.ToGuid();
+
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(lastContacted));
+			#endregion
+			#region Last Order Made(Date, Read Only)
+			FieldCreationInformation lastOrderMade = new FieldCreationInformation(FieldType.DateTime);
+			lastOrderMade.DisplayName = "Last order made";
+			lastOrderMade.InternalName = "LastOrderMade";
+			lastOrderMade.Group = "ODA1";
+			lastOrderMade.Id = Constants.GUID.CustomerCT.LAST_ORDER_MADE.ToGuid();
+
+			FieldDateTime addedLastOderMade = ctx.Web.CreateField<FieldDateTime>(lastOrderMade, false);
+			addedLastOderMade.ReadOnlyField = true;
+			addedLastOderMade.Update();
+			ctx.ExecuteQuery();
+
+			ctx.Web.AddFieldToContentType(customerCT, addedLastOderMade);
+			#endregion
 		}
 	}
 }
