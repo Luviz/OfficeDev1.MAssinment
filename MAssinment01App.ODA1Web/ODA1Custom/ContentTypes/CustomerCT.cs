@@ -11,7 +11,7 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 		internal static void CreateCustomerCT(ClientContext ctx) {
 
 			//Looking for The Contetype by ID!
-			if (ctx.Web.ContentTypeExistsById(Constants.GUID.CustomerCT.CustomerCTGUID)) {
+			if (!ctx.Web.ContentTypeExistsById(Constants.GUID.CustomerCT.CustomerCTGUID)) {
 				ContentTypeCreationInformation ctci = new ContentTypeCreationInformation();
 				ctci.Name = "ODA1_CustomerCT";
 				ctci.Group = "ODA1";
@@ -21,6 +21,7 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 
 				ContentType customerCT = ctx.Web.ContentTypes.Add(ctci);
 				ctx.ExecuteQueryRetry();
+
 				CreateFields(ctx, customerCT);
 			}
 		}
@@ -43,7 +44,7 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 			FieldCreationInformation address = new FieldCreationInformation(FieldType.Text);
 			address.DisplayName = "Address";
 			address.InternalName = "Address";
-			address.Group = "ODA1"
+			address.Group = "ODA1";
 		                address.Id = Constants.GUID.CustomerCT.ADDRESS.ToGuid();
 			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(address));
 			#endregion

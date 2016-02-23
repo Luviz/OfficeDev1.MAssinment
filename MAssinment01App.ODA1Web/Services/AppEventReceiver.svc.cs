@@ -15,10 +15,11 @@ namespace MAssinment01App.ODA1Web.Services {
 		public SPRemoteEventResult ProcessEvent(SPRemoteEventProperties properties) {
 			SPRemoteEventResult result = new SPRemoteEventResult();
 
-			using (ClientContext clientContext = TokenHelper.CreateAppEventClientContext(properties, useAppWeb: false)) {
-				if (clientContext != null) {
+			using (ClientContext ctx = TokenHelper.CreateAppEventClientContext(properties, useAppWeb: false)) {
+				if (ctx != null) {
 					switch (properties.EventType) {
 						case SPRemoteEventType.AppInstalled:
+							Install(ctx);
 							break;
 						case SPRemoteEventType.AppUninstalling:
 							break;
@@ -31,12 +32,21 @@ namespace MAssinment01App.ODA1Web.Services {
 			return result;
 		}
 
+
+		[SharePointContextFilter]
+		private void Install(ClientContext ctx) {
+			ODA1Custom.ContentTypes.CustomerCT.CreateCustomerCT(ctx);
+		}
+
+
+
+
 		/// <summary>
 		/// This method is a required placeholder, but is not used by app events.
 		/// </summary>
 		/// <param name="properties">Unused.</param>
 		public void ProcessOneWayEvent(SPRemoteEventProperties properties) {
-			throw new NotImplementedException();
+
 		}
 
 	}

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MAssinment01App.ODA1Web.ODA1Custom.Constants.GUID {
 	public class CustomerCT {
-		public const string CustomerCTGUID = "0x0100D22E0F33-8AA1-4960-97ED-824A46201503";
+		public const string CustomerCTGUID = "0x0100D22E0F338AA1496097ED824A46201503";
 
 		public const string CUSTOMER_LOGO = "{0D0B0131-FFA1-4B42-AAF9-325FB3879147}";
 		public const string ADDRESS = "{4069764C-679E-4028-9E95-12E8AF2FF80A}";

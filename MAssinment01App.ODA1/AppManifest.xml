@@ -16,4 +16,7 @@
   <AppPrincipal>
     <RemoteWebApplication ClientId="*" />
   </AppPrincipal>
+  <AppPermissionRequests>
+    <AppPermissionRequest Scope="http://sharepoint/content/sitecollection" Right="FullControl" />
+  </AppPermissionRequests>
 </App>
