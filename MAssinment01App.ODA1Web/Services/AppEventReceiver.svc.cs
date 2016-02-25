@@ -36,6 +36,7 @@ namespace MAssinment01App.ODA1Web.Services {
 		[SharePointContextFilter]
 		private void Install(ClientContext ctx) {
 			ODA1Custom.ContentTypes.CustomerCT.CreateCustomerCT(ctx);
+			ODA1Custom.ContentTypes.OrderCT.CreateOrderCT(ctx);
 		}
 
 

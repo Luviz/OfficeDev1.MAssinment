@@ -229,8 +229,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ODA1Custom\Constants\GUID\OrderCT.cs" />
     <Compile Include="ODA1Custom\Constants\GUID\CustomerCT.cs" />
     <Compile Include="ODA1Custom\ContentTypes\CustomerCT.cs" />
+    <Compile Include="ODA1Custom\ContentTypes\OrderCT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppEventReceiver.svc.cs">
       <DependentUpon>AppEventReceiver.svc</DependentUpon>

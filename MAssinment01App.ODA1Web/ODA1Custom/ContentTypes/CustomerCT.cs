@@ -21,7 +21,7 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 
 				ContentType customerCT = ctx.Web.ContentTypes.Add(ctci);
 				ctx.ExecuteQueryRetry();
-
+				ClearFields(ctx);
 				CreateFields(ctx, customerCT);
 			}
 		}
@@ -45,13 +45,14 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 			address.DisplayName = "Address";
 			address.InternalName = "Address";
 			address.Group = "ODA1";
-		                address.Id = Constants.GUID.CustomerCT.ADDRESS.ToGuid();
+			address.Id = Constants.GUID.CustomerCT.ADDRESS.ToGuid();
 			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(address));
 			#endregion
 			#region Main Contact Person
 			FieldCreationInformation contactPerson = new FieldCreationInformation(FieldType.Text);
 			contactPerson.DisplayName = "Contact Person";
 			contactPerson.InternalName = "contactPerson";
+			contactPerson.Group = "ODA1";
 			contactPerson.Id = Constants.GUID.CustomerCT.MAIN_CONTACT_PERSON.ToGuid();
 
 			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(contactPerson));
@@ -60,22 +61,25 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 			FieldCreationInformation phoneOffice = new FieldCreationInformation(FieldType.Text);
 			phoneOffice.DisplayName = "Office Phone";
 			phoneOffice.InternalName = "phoneOffice";
+			phoneOffice.Group = "ODA1";
 			phoneOffice.Id = Constants.GUID.CustomerCT.PHONE_OFFICE.ToGuid();
 
 			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(phoneOffice));
 			#endregion
 			#region Mobile Phone
 			FieldCreationInformation phoneMobile = new FieldCreationInformation(FieldType.Text);
-			phoneOffice.DisplayName = "Mobile";
-			phoneOffice.InternalName = "phoneMobile";
-			phoneOffice.Id = Constants.GUID.CustomerCT.PHONE_MOBILE.ToGuid();
+			phoneMobile.DisplayName = "Mobile";
+			phoneMobile.InternalName = "phoneMobile";
+			phoneMobile.Group = "ODA1";
+			phoneMobile.Id = Constants.GUID.CustomerCT.PHONE_MOBILE.ToGuid();
 
-			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(phoneOffice));
+			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(phoneMobile));
 			#endregion
 			#region Email
 			FieldCreationInformation email = new FieldCreationInformation(FieldType.Text);
 			email.DisplayName = "E-Mail";
 			email.InternalName = "Email";
+			email.Group = "ODA1";
 			email.Id = Constants.GUID.CustomerCT.EMAIL.ToGuid();
 
 			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(email));
@@ -84,6 +88,7 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 			FieldCreationInformation lastContacted = new FieldCreationInformation(FieldType.DateTime);
 			lastContacted.DisplayName = "Last Contacted";
 			lastContacted.InternalName = "LastContacted";
+			lastContacted.Group = "ODA1";
 			lastContacted.Id = Constants.GUID.CustomerCT.LAST_CONTACTED.ToGuid();
 
 			ctx.Web.AddFieldToContentType(customerCT, ctx.Web.CreateField(lastContacted));
@@ -103,5 +108,18 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 			ctx.Web.AddFieldToContentType(customerCT, addedLastOderMade);
 			#endregion
 		}
+
+		private static void ClearFields(ClientContext ctx) {
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.CUSTOMER_LOGO);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.ADDRESS);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.MAIN_CONTACT_PERSON);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.PHONE_OFFICE);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.PHONE_MOBILE);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.EMAIL);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.LAST_CONTACTED);
+			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.LAST_ORDER_MADE);
+		}
+
+		
 	}
 }
