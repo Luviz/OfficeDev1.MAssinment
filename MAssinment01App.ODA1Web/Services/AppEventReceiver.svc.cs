@@ -37,6 +37,9 @@ namespace MAssinment01App.ODA1Web.Services {
 		private void Install(ClientContext ctx) {
 			ODA1Custom.ContentTypes.CustomerCT.CreateCustomerCT(ctx);
 			ODA1Custom.ContentTypes.OrderCT.CreateOrderCT(ctx);
+
+			ODA1Custom.Lists.Customer.CreateCustomerList(ctx);
+			ODA1Custom.Lists.Order.CreateOrderList(ctx);
 		}
 
 

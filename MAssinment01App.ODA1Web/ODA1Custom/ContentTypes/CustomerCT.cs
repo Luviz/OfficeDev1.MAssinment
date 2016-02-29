@@ -21,7 +21,13 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 
 				ContentType customerCT = ctx.Web.ContentTypes.Add(ctci);
 				ctx.ExecuteQueryRetry();
-				ClearFields(ctx);
+				try {
+					ClearFields(ctx);
+
+				}
+				catch (Exception) {
+
+				}
 				CreateFields(ctx, customerCT);
 			}
 		}
@@ -120,6 +126,6 @@ namespace MAssinment01App.ODA1Web.ODA1Custom.ContentTypes {
 			ctx.Web.RemoveFieldById(Constants.GUID.CustomerCT.LAST_ORDER_MADE);
 		}
 
-		
+
 	}
 }
