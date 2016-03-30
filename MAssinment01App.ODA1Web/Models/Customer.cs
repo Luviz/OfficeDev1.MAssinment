@@ -13,7 +13,8 @@ namespace MAssinment01App.ODA1Web.Models {
 		public string OfficePhone { get; set; }
 		public string Mobile { get; set; }
 		public string Email { get; set; }
+		public DateTime Created { get; set; }
 
-		public List<Order> Orders { get; }
+		public List<Order> Orders { get; set; }
 	}
 }

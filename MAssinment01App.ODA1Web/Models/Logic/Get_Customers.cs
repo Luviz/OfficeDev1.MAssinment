@@ -7,7 +7,6 @@ using System.Web;
 namespace MAssinment01App.ODA1Web.Models.Logic {
 	public static class Get_Customers {
 		private const string CQ_XML = @"<Query>
-					  
 					  <OrderBy>
 						 <FieldRef Name='Title' Ascending='False' />
 						 <FieldRef Name='DispLogo' Ascending='False' />
@@ -16,9 +15,10 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 						 <FieldRef Name='phoneOffice' Ascending='False' />
 						 <FieldRef Name='phoneMobile' Ascending='False' />
 						 <FieldRef Name='Email' Ascending='False' />
+						 <FieldRef Name='Created' Ascending='False' />
 						</OrderBy>
 					</Query>";
-		internal static List<Customer> GetCustomers(this ClientContext ctx, int Id) {
+		internal static List<Customer> GetCustomers(this ClientContext ctx) {
 			if (ctx.Web.ListExists("Customer")) {
 				var List = ctx.Web.GetListByTitle("Customer");
 
@@ -49,6 +49,7 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			ret.OfficePhone = li["phoneOffice"].ToString();
 			ret.Mobile = li["phoneMobile"].ToString();
 			ret.Email = li["Email"].ToString();
+			ret.Created = (DateTime)li["Created"];
 			return ret;
 		}
 

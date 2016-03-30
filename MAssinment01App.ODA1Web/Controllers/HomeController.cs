@@ -20,7 +20,9 @@ namespace MAssinment01App.ODA1Web.Controllers {
 					clientContext.Load(spUser, user => user.Title);
 
 					clientContext.ExecuteQuery();
-					var a = Models.Logic.Get_Customers.GetCustomers(clientContext, 1);
+					var a = Models.Logic.Get_Customers.GetCustomers(clientContext);
+					var ab = Models.Logic.Get_Orders.GetOrders(clientContext);
+
 					ViewBag.UserName = spUser.Title;
 				}
 			}
