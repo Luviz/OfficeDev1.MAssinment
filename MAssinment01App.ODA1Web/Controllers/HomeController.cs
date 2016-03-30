@@ -20,9 +20,11 @@ namespace MAssinment01App.ODA1Web.Controllers {
 					clientContext.Load(spUser, user => user.Title);
 
 					clientContext.ExecuteQuery();
-					var a = Models.Logic.Get_Customers.GetCustomers(clientContext);
-					var ab = Models.Logic.Get_Orders.GetOrders(clientContext);
+					var customers = Models.Logic.Get_Customers.GetCustomers(clientContext);
+					var orders = Models.Logic.Get_Orders.GetOrders(clientContext);
 
+					ViewBag.NewstCustomers = customers.OrderByDescending(c => c.Created).Take(3) ;
+					ViewBag.NewstOrders = orders.OrderByDescending(o => o.Created).Take(5);
 					ViewBag.UserName = spUser.Title;
 				}
 			}

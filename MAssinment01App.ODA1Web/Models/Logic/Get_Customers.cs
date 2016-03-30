@@ -40,10 +40,12 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 		}
 
 		private static Customer ParseCustomer(this ListItem li) {
+			var logo = li["DispLogo"] as FieldUrlValue;
+
 			Customer ret = new Customer();
 			ret.ID = int.Parse(li["ID"].ToString());
 			ret.Title = li["Title"].ToString();
-			ret.Logo = li["DispLogo"].ToString();
+			ret.Logo = logo.Url;
 			ret.Address = li["Address"].ToString();
 			ret.ContactPerson = li["contactPerson"].ToString();
 			ret.OfficePhone = li["phoneOffice"].ToString();
