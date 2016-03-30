@@ -1,0 +1,8 @@
+﻿<Query>
+  <where>
+    <Eq>
+      <FieldRef Name='ID' />
+      <Value Type='Counter'>{id}</Value>
+    </Eq>
+  </where>
+</Query>

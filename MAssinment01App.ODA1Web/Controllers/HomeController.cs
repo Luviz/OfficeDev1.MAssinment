@@ -20,7 +20,7 @@ namespace MAssinment01App.ODA1Web.Controllers {
 					clientContext.Load(spUser, user => user.Title);
 
 					clientContext.ExecuteQuery();
-
+					var a = Models.Logic.Get_Customers.GetCustomers(clientContext, 1);
 					ViewBag.UserName = spUser.Title;
 				}
 			}
@@ -30,7 +30,7 @@ namespace MAssinment01App.ODA1Web.Controllers {
 
 		public ActionResult About() {
 			ViewBag.Message = "Your application description page.";
-
+			
 			return View();
 		}
 
