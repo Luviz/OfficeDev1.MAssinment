@@ -1,4 +1,5 @@
 ﻿using MAssinment01App.ODA1Web.Models;
+using MAssinment01App.ODA1Web.Models.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,27 @@ namespace MAssinment01App.ODA1Web.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
+		[SharePointContextFilter]
         public ActionResult Index()
         {
-			List<Customer> customers = Models.Logic.Get_Customers();
+			var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+			using (var clientContext = spContext.CreateUserClientContextForSPHost()) {
+				List<Customer> customers = clientContext.GetCustomers();
+				List<Order> orders = clientContext.GetOrders();
+				customers.GetOrders(orders);
 
-			return View();
+				return View(customers);
+			}
         }
 
         // GET: Customer/Details/5
+		[SharePointContextFilter]
         public ActionResult Details(int id)
         {
-            return View();
+			var spCtx = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+			using (var ctx = spCtx.CreateUserClientContextForSPHost()) {
+				return View(ctx.GetCustomer(id));
+			}
         }
 
         // GET: Customer/Create

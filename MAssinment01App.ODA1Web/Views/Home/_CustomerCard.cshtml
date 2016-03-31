@@ -1,6 +1,15 @@
 ﻿@model MAssinment01App.ODA1Web.Models.Customer
 
-<div class="row">
+<style>
+	div .customerCard:hover {
+		background-color:lightgray;
+	}
+	.customerCard img {
+		margin-top: 1em;
+	}
+</style>
+
+<div class="row customerCard" data-href="@Url.Action("Details", "Customer",new {id = Model.ID})?SPHostUrl=@Request.QueryString.Get("SPHostURL")">
 	<div class="col-md-3">
 
 		<img src="@Model.Logo" height="100px"  alt="Alternate Text" />

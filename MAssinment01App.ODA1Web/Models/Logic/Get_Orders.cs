@@ -19,23 +19,31 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 					</OrderBy>
 				</Query>";
 
-		internal static List<Order> GetOrders(ClientContext ctx) {
+		internal static List<Order> GetOrders(this ClientContext ctx) {
 			if (ctx.Web.ListExists("Order")) {
 				var List = ctx.Web.GetListByTitle("Order");
 
 				CamlQuery cq = new CamlQuery();
 				cq.ViewXml = CQ_XML;
-				var customers = List.GetItems(cq);
-				ctx.Load(customers);
+				var orders = List.GetItems(cq);
+				ctx.Load(orders);
 
 				ctx.ExecuteQuery();
-				List<Order> ret = new List<Order>();
-				foreach (var c in customers.ToList()) {
-					ret.Add(c.ParseOrder());
-				}
+				List<Order> ret = orders.ParseOrders();
+				//foreach (var c in customers.ToList()) {
+				//	ret.Add(c.ParseOrder());
+				//}
 				return ret;
 			}
 			return null;
+		}
+
+		internal static List<Order> ParseOrders(this ListItemCollection lc) {
+			var ret = new List<Order>();
+			foreach (var il in lc.ToList()) {
+				ret.Add(il.ParseOrder());
+			}
+			return ret;
 		}
 
 		private static Order ParseOrder(this ListItem li) {

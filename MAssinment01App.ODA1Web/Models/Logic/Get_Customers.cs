@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MAssinment01App.ODA1Web.Models;
 using System.Web;
 
 namespace MAssinment01App.ODA1Web.Models.Logic {
@@ -18,6 +19,38 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 						 <FieldRef Name='Created' Ascending='False' />
 						</OrderBy>
 					</Query>";
+
+		internal static Customer GetCustomer (this ClientContext ctx, int id) {
+			if (ctx.Web.ListExists("Customer") && ctx.Web.ListExists("Order")) {
+				//get Customer
+				var customers = ctx.Web.Lists.GetByTitle("Customer");
+				var cQuery = new CamlQuery();
+				cQuery.ViewXml = $@"<View><Query><Where><Eq>
+					<FieldRef Name='ID' /><Value Type='Counter'>{id}</Value>
+				</Eq></Where></Query></View>";
+				var customer = customers.GetItems(cQuery);
+
+				//Get Orders
+				var orders = ctx.Web.Lists.GetByTitle("Order");
+				var oQuery = new CamlQuery();
+				oQuery.ViewXml = $@"<View><Query><Where><Eq>
+					<FieldRef Name='Customer' LookupId='TRUE'/><Value Type='Lookup'>{id}</Value>
+				</Eq></Where></Query></View>";
+				var customerOrders = orders.GetItems(oQuery);
+
+				//Loading
+				ctx.Load(customer);
+				ctx.Load(customerOrders);
+
+				ctx.ExecuteQuery();
+				var ret = customer[0].ParseCustomer();
+				ret.Orders = customerOrders.ParseOrders();
+				return ret; 
+			}
+			return null;
+
+		}
+
 		internal static List<Customer> GetCustomers(this ClientContext ctx) {
 			if (ctx.Web.ListExists("Customer")) {
 				var List = ctx.Web.GetListByTitle("Customer");
@@ -55,5 +88,10 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			return ret;
 		}
 
+		internal static void GetOrders(this List<Customer> customers, List<Order> orders) {
+			foreach (var customer in customers) {
+				customer.Orders = orders.Where(o => o.Customer.ID == customer.ID).ToList();
+			}
+		}
 	}
 }
