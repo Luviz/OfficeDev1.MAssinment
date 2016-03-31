@@ -1,12 +1,9 @@
 ﻿@{
 	ViewBag.Title = "Home Page";
 }
-@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/_CustomerCard.js"></script>*@
 
 <div class="container">
 	<div class="col-md-6">
-		
 		<div class="page-header"><h3>Latest Customers</h3></div>
 		@foreach(MAssinment01App.ODA1Web.Models.Customer c in ViewBag.NewstCustomers) {
 			@Html.Partial("_CustomerCard", c)

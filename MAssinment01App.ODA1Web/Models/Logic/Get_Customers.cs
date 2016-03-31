@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OfficeDevPnP.Core;
 using MAssinment01App.ODA1Web.Models;
 using System.Web;
 
@@ -72,6 +73,19 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			return null;
 		}
 
+		internal static void EditCustomer(this Customer customer, ClientContext ctx ) {
+			var customers = ctx.Web.Lists.GetByTitle("Customer");
+			var oCustomer = customers.GetItemById(customer.ID);
+			oCustomer["Title"] = customer.Title;
+			oCustomer["Address"] = customer.Address;
+			oCustomer["contactPerson"] = customer.ContactPerson;
+			oCustomer["phoneOffice"] = customer.OfficePhone;
+			oCustomer["phoneMobile"] = customer.Mobile;
+			oCustomer["Email"] = customer.Email;
+
+			customers.Update();
+			ctx.ExecuteQuery();
+		}
 		private static Customer ParseCustomer(this ListItem li) {
 			var logo = li["DispLogo"] as FieldUrlValue;
 

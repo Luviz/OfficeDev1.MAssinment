@@ -291,6 +291,9 @@
     <Content Include="Views\Home\_CustomerCard.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\_OrdersList.cshtml" />
+    <Content Include="Views\Customer\EditList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
