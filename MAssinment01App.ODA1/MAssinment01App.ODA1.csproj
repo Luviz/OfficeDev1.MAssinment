@@ -43,6 +43,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="AddCustomer\Elements.xml">
+      <OpcRelationship>feature-elementmanifest</OpcRelationship>
+    </Content>
     <Content Include="AppIcon.png">
       <OpcRelationship>manifest-icon</OpcRelationship>
     </Content>
@@ -52,6 +55,9 @@
     </Content>
     <Content Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
+    </Content>
+    <Content Include="ToCustomerCard\Elements.xml">
+      <OpcRelationship>feature-elementmanifest</OpcRelationship>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +77,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AddCustomer\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f36d0fd1-3d5f-4ada-b284-062142590f04}</SharePointProjectItemId>
+    </None>
     <None Include="app.config" />
     <None Include="Features\Feature1\Feature1.feature">
       <FeatureId>{b5b95c72-c8ad-4b3b-9853-e24f13143583}</FeatureId>
@@ -81,6 +90,9 @@
     </None>
     <None Include="SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5d04eb85-2fed-45cf-9b1f-9a2d44716ad9}</SharePointProjectItemId>
+    </None>
+    <None Include="ToCustomerCard\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{207c8da3-0ea4-4c2e-9c63-7773c97ebd5c}</SharePointProjectItemId>
     </None>
   </ItemGroup>
   <ItemGroup>

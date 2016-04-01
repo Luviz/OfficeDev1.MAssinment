@@ -1,0 +1,21 @@
+﻿@model IEnumerable<MAssinment01App.ODA1Web.Models.Order>
+@*Orders*@
+<h4>Orders</h4>
+<table class="table table-hover table-striped">
+	<tr>
+		<th>Title</th>
+		<th>Created</th>
+		<th>Type</th>
+		<th>Price</th>
+	</tr>
+	<tbody>
+		@foreach (MAssinment01App.ODA1Web.Models.Order o in Model) {
+			<tr>
+				<td>@o.Title</td>
+				<td>@o.Created</td>
+				<td>@o.Product</td>
+				<td>@o.Price kr</td>
+			</tr>
+			}
+	</tbody>
+</table>

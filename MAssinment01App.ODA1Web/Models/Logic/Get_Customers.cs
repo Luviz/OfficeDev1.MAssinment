@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OfficeDevPnP.Core;
 using MAssinment01App.ODA1Web.Models;
 using System.Web;
 
@@ -75,15 +74,17 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 
 		internal static void EditCustomer(this Customer customer, ClientContext ctx ) {
 			var customers = ctx.Web.Lists.GetByTitle("Customer");
-			var oCustomer = customers.GetItemById(customer.ID);
-			oCustomer["Title"] = customer.Title;
-			oCustomer["Address"] = customer.Address;
-			oCustomer["contactPerson"] = customer.ContactPerson;
-			oCustomer["phoneOffice"] = customer.OfficePhone;
-			oCustomer["phoneMobile"] = customer.Mobile;
-			oCustomer["Email"] = customer.Email;
+			var customerListItem = customers.GetItemById(customer.ID);
+			
+			customerListItem["Title"] = customer.Title;
+			customerListItem["Address"] = customer.Address;
+			customerListItem["contactPerson"] = customer.ContactPerson;
+			customerListItem["phoneOffice"] = customer.OfficePhone;
+			customerListItem["phoneMobile"] = customer.Mobile;
+			customerListItem["Email"] = customer.Email;
 
-			customers.Update();
+			customerListItem.Update();
+
 			ctx.ExecuteQuery();
 		}
 		private static Customer ParseCustomer(this ListItem li) {
@@ -91,7 +92,8 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 
 			Customer ret = new Customer();
 			ret.ID = int.Parse(li["ID"].ToString());
-			ret.Title = li["Title"].ToString();
+			//sometimes Title dose not read
+			ret.Title = string.IsNullOrEmpty(li["Title"].ToString())? "null" : li["Title"].ToString();
 			ret.Logo = logo.Url;
 			ret.Address = li["Address"].ToString();
 			ret.ContactPerson = li["contactPerson"].ToString();

@@ -1,0 +1,90 @@
+﻿@model MAssinment01App.ODA1Web.Models.Customer
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Details</title>
+</head>
+<body>
+	<div>
+	</div>
+	<div>
+		<h4>Customer</h4>
+		<hr />
+		<div class="row">
+			<div class="col-md-3">
+				<img src="@Model.Logo" height="200px" alt="Alternate Text" />
+			</div>
+			<div class="col-md-9">
+				<dl class="dl-horizontal">
+					<dt>
+						@Html.DisplayNameFor(model => model.Title)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.Title)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.Address)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.Address)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.ContactPerson)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.ContactPerson)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.OfficePhone)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.OfficePhone)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.Mobile)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.Mobile)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.Email)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.Email)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.Created)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.Created)
+					</dd>
+
+				</dl>
+			</div>
+		</div>
+
+		@Html.ActionLink("Back to List", "Index")
+
+	</div>
+	<hr />
+
+	@Html.Partial("_OrdersList", Model.Orders)	
+</body>
+</html>
