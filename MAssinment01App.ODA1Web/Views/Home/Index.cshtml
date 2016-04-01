@@ -5,18 +5,18 @@
 <div class="container">
 	<div class="col-md-6">
 		<div class="page-header"><h3>Latest Customers</h3></div>
-		@foreach(MAssinment01App.ODA1Web.Models.Customer c in ViewBag.NewstCustomers) {
+		@foreach (MAssinment01App.ODA1Web.Models.Customer c in ViewBag.NewstCustomers) {
 			@Html.Partial("_CustomerCard", c)
 		}
 	</div>
 	<div class="col-md-6">
 		<div class="page-header"><h3>Latest Products</h3></div>
 		<table class="table table-hover table-striped">
-				<tr>
-					<th>Title</th>
-					<th>Created</th>
-					<th>Type</th>
-					<th>Price</th>
+			<tr>
+				<th>Title</th>
+				<th>Created</th>
+				<th>Type</th>
+				<th>Price</th>
 			</tr>
 			<tbody>
 				@foreach (MAssinment01App.ODA1Web.Models.Order o in ViewBag.NewstOrders) {
@@ -29,6 +29,10 @@
 				}
 			</tbody>
 		</table>
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-sm-offset-2" style="padding-top:5px">
+		<input class="btn btn-default" type="button" @ViewBag.RandomButtom data-href="@Url.Action("Details", "Customer",new {id = ViewBag.RandomCustomerWithNoOrders.ID})?SPHostUrl=@Request.QueryString.Get("SPHostURL")" name="name" value="Get Random Customer" />
 	</div>
 </div>
 
