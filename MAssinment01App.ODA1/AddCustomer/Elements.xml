@@ -25,7 +25,7 @@
       </CommandUIDefinitions>
       <CommandUIHandlers>
         <CommandUIHandler Command="Invoke_AddCustomerButtonRequest"
-                          CommandAction="~remoteAppUrl/?{StandardTokens}&amp;SPListItemId={SelectedItemId}&amp;SPListId={SelectedListId}"/>
+                          CommandAction="~remoteAppUrl/Customer/Create?{StandardTokens}"/>
       </CommandUIHandlers>
     </CommandUIExtension >
   </CustomAction>
