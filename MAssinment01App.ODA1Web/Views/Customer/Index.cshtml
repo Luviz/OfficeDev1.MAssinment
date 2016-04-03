@@ -10,72 +10,75 @@
 	<title>Index</title>
 </head>
 <body>
-	<p>
-		@Html.ActionLink("Create New", "Create")
-	</p>
-	<table class="table">
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.Title)
-			</th>
-			<th>
-				Orders
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Address)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ContactPerson)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.OfficePhone)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Mobile)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Email)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Created)
-			</th>
-			<th></th>
-		</tr>
-		<tbody>
-			@foreach (var item in Model) {
-				<tr>
-					<td>
-						@Html.DisplayFor(modelItem => item.Title)
-					</td>
-					<td>
-						@item.Orders.Count
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Address)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.ContactPerson)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.OfficePhone)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Mobile)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Email)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Created)
-					</td>
-					<td>
-						@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-						@Html.ActionLink("Details", "Details", new { id = item.ID }) |
-						@Html.ActionLink("Delete", "Delete", new { id = item.ID })
-					</td>
-				</tr>
+	<div class="container">
+		<h2></h2>
+		<p>
+			@Html.ActionLink("Create New", "Create")
+		</p>
+		<table class="table table-hover">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Title)
+				</th>
+				<th>
+					Orders
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Address)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ContactPerson)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.OfficePhone)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Mobile)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Email)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Created)
+				</th>
+				<th></th>
+			</tr>
+			<tbody>
+				@foreach (var item in Model) {
+					<tr data-href="@Url.Action("Details", "Customer",new {id = item.ID})?SPHostUrl=@Request.QueryString.Get("SPHostURL")">
+						<td>
+							@Html.DisplayFor(modelItem => item.Title)
+						</td>
+						<td>
+							@item.Orders.Count
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Address)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.ContactPerson)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.OfficePhone)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Mobile)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Email)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Created)
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+							@Html.ActionLink("Details", "Details", new { id = item.ID }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.ID })
+						</td>
+					</tr>
 			}
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MAssinment01App.ODA1Web.Models;
 using System.Web;
+using OfficeDevPnP.Core;
 
 namespace MAssinment01App.ODA1Web.Models.Logic {
 	public static class Get_Customers {
@@ -87,6 +88,22 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 
 			ctx.ExecuteQuery();
 		}
+
+		internal static void CreateCustomer(this Customer customer, ClientContext ctx) {
+			var customers = ctx.Web.Lists.GetByTitle("Customer");
+			ListItem li = customers.AddItem(new ListItemCreationInformation());
+			li["Title"] = customer.Title;
+			li["Address"] = customer.Address;
+			li["contactPerson"] = customer.ContactPerson;
+			li["phoneOffice"] = customer.OfficePhone;
+			li["phoneMobile"] = customer.Mobile;
+			li["Email"] = customer.Email;
+			li["DispLogo"] = new FieldUrlValue() { Description = customer.Title + " Logo", Url = customer.Logo };
+
+			li.Update();
+			ctx.ExecuteQuery();
+		}
+
 		private static Customer ParseCustomer(this ListItem li) {
 			var logo = li["DispLogo"] as FieldUrlValue;
 

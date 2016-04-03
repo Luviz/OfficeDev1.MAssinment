@@ -29,7 +29,8 @@ namespace MAssinment01App.ODA1Web.Controllers {
 
 					ViewBag.RandomCustomerWithNoOrders = customers.Where(c => !c.Orders.Any())
 						.ToList().GetRand();
-					ViewBag.RandomButtom = ViewBag.RandomCustomerWithNoOrders != null ? "" : "disabled=''";
+
+					ViewBag.Customer = new SelectList(customers, "ID", "Title");
 
 					ViewBag.NewstCustomers = customers.OrderByDescending(c => c.Created).Take(3) ;
 					ViewBag.NewstOrders = orders.OrderByDescending(o => o.Created).Take(5);

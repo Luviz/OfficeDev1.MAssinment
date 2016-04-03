@@ -16,7 +16,6 @@ namespace MAssinment01App.ODA1Web.Controllers {
 				List<Customer> customers = clientContext.GetCustomers();
 				List<Order> orders = clientContext.GetOrders();
 				customers.GetOrders(orders);
-
 				return View(customers);
 			}
 		}
@@ -31,20 +30,24 @@ namespace MAssinment01App.ODA1Web.Controllers {
 		}
 
 		// GET: Customer/Create
+		[SharePointContextFilter]
 		public ActionResult Create() {
 			return View();
 		}
 
 		// POST: Customer/Create
 		[HttpPost]
-		public ActionResult Create(FormCollection collection) {
+		[SharePointContextFilter]
+		public ActionResult CreateCustomer(Customer customer) {
 			try {
-				// TODO: Add insert logic here
-
-				return RedirectToAction("Index");
+				var spCtx = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+				using (var ctx = spCtx.CreateUserClientContextForSPHost()) {
+					customer.CreateCustomer(ctx);
+					return RedirectToAction("Index", new { SPHostUrl = Request.QueryString.Get("SPHostUrl") });
+				}
 			}
 			catch {
-				return View();
+				return RedirectToAction("Create");
 			}
 		}
 
@@ -69,7 +72,7 @@ namespace MAssinment01App.ODA1Web.Controllers {
 				}
 				return RedirectToAction("Index", new { SPHostUrl = Request.QueryString.Get("SPHostUrl") });
 			}
-			catch(Exception e) {
+			catch (Exception e) {
 				ViewBag.e = e;
 				throw new HttpException("bad", e);
 			}

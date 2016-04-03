@@ -11,6 +11,8 @@
 	</div>
 	<div class="col-md-6">
 		<div class="page-header"><h3>Latest Products</h3></div>
+		@Html.Partial("_CreateOrder")
+		<h2></h2>
 		<table class="table table-hover table-striped">
 			<tr>
 				<th>Title</th>
@@ -34,6 +36,7 @@
 	<div class="col-sm-offset-2" style="padding-top:5px">
 		<input class="btn btn-default" type="button" @ViewBag.RandomButtom data-href="@Url.Action("Details", "Customer",new {id = ViewBag.RandomCustomerWithNoOrders.ID})?SPHostUrl=@Request.QueryString.Get("SPHostURL")" name="name" value="Get Random Customer" />
 	</div>
+
 </div>
 
 
