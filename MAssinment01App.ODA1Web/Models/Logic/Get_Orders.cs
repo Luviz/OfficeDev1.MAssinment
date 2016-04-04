@@ -45,7 +45,7 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			li["Title"] = title;
 			li["Customer"] = new FieldLookupValue() { LookupId = customerId.ToInt32()};
 			li["Product_2"] = new TaxonomyFieldValue() { TermGuid = ProductId, Label="", WssId=-1};
-			li["Price"] = price.ToDouble().ToString();
+			li["Price"] = price;
 
 			li.Update();
 			ctx.ExecuteQuery();

@@ -25,7 +25,16 @@ namespace MAssinment01App.ODA1Web.Controllers {
 		public ActionResult Details(int id) {
 			var spCtx = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
 			using (var ctx = spCtx.CreateUserClientContextForSPHost()) {
-				return View(ctx.GetCustomer(id));
+				var customer = ctx.GetCustomer(id);
+
+				//Need For _CreateOrder
+				var list = new List<Customer>();
+				list.Add(customer);
+				var prods = ctx.GetProdcuts();
+				ViewBag.Customer = new SelectList(list, "ID", "Title");
+				ViewBag.Product = new SelectList(prods, "Guid", "Label");
+
+				return View(customer);
 			}
 		}
 

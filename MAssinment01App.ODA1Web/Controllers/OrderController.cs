@@ -13,6 +13,10 @@ namespace MAssinment01App.ODA1Web.Controllers {
 		public ActionResult Index() {
 			var spctx = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
 			using (var ctx = spctx.CreateUserClientContextForSPHost()) {
+				//Need For _CreateOrder
+				var prods = ctx.GetProdcuts();
+				ViewBag.Customer = new SelectList(ctx.GetCustomers(), "ID", "Title");
+				ViewBag.Product = new SelectList(prods, "Guid", "Label");
 				return View(ctx.GetOrders());
 			}
 		}
@@ -36,7 +40,7 @@ namespace MAssinment01App.ODA1Web.Controllers {
 
 					ctx.AddOrder(newOrder.Title, Customer, Product, newOrder.Price.ToString());
 
-					return RedirectToAction("Index", new { SPHostUrl = Request.QueryString.Get("SPHostUrl") });
+					return Redirect(Request.UrlReferrer.ToString()+ "?SPHostUrl="+ Request.QueryString.Get("SPHostUrl") ); //SPHost my not bee needed but im haveing it just incase!
 				}
 			}
 			catch (Exception e){
