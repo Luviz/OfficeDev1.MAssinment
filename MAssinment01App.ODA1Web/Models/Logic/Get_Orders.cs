@@ -37,6 +37,19 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			}
 			return null;
 		}
+		internal static void AddOrder
+					(this ClientContext ctx, string title, string customerId, string ProductId, string price) {
+			var orders = ctx.Web.Lists.GetByTitle("Order");
+			ListItem li = orders.AddItem(new ListItemCreationInformation());
+
+			li["Title"] = title;
+			li["Customer"] = new FieldLookupValue() { LookupId = customerId.ToInt32()};
+			li["Product_2"] = new TaxonomyFieldValue() { TermGuid = ProductId, Label="", WssId=-1};
+			li["Price"] = price.ToDouble().ToString();
+
+			li.Update();
+			ctx.ExecuteQuery();
+		}
 
 		internal static List<Order> ParseOrders(this ListItemCollection lc) {
 			var ret = new List<Order>();
@@ -45,6 +58,7 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			}
 			return ret;
 		}
+
 
 		private static Order ParseOrder(this ListItem li) {
 
@@ -55,7 +69,7 @@ namespace MAssinment01App.ODA1Web.Models.Logic {
 			ret.ID = int.Parse(li["ID"].ToString());
 			ret.Title = li["Title"].ToString();
 			ret.Product = prod.Label;
-			ret.Price = (double) li["Price"];
+			ret.Price = (double)li["Price"];
 			ret.Created = (DateTime)li["Created"];
 			if (cust != null) {
 				ret.Customer = new miniCustomer { ID = cust.LookupId, Title = cust.LookupValue };

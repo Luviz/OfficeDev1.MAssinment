@@ -15,22 +15,26 @@ namespace MAssinment01App.ODA1Web.Controllers {
 
 			var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
 
-			using (var clientContext = spContext.CreateUserClientContextForSPHost()) {
-				if (clientContext != null) {
-					spUser = clientContext.Web.CurrentUser;
+			using (var ctx = spContext.CreateUserClientContextForSPHost()) {
+				if (ctx != null) {
+					spUser = ctx.Web.CurrentUser;
 
-					clientContext.Load(spUser, user => user.Title);
+					ctx.Load(spUser, user => user.Title);
 
-					clientContext.ExecuteQuery();
-					var customers = Models.Logic.Get_Customers.GetCustomers(clientContext);
-					var orders = Models.Logic.Get_Orders.GetOrders(clientContext);
+					ctx.ExecuteQuery();
+					var customers = Models.Logic.Get_Customers.GetCustomers(ctx);
+					var orders = Models.Logic.Get_Orders.GetOrders(ctx);
 
 					customers.GetOrders(orders);
 
 					ViewBag.RandomCustomerWithNoOrders = customers.Where(c => !c.Orders.Any())
 						.ToList().GetRand();
 
+
+					var prods = ctx.GetProdcuts();
+					//Need For _CreateOrder
 					ViewBag.Customer = new SelectList(customers, "ID", "Title");
+					ViewBag.Product = new SelectList(prods, "Guid", "Label");
 
 					ViewBag.NewstCustomers = customers.OrderByDescending(c => c.Created).Take(3) ;
 					ViewBag.NewstOrders = orders.OrderByDescending(o => o.Created).Take(5);

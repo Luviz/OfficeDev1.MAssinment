@@ -235,7 +235,9 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Logic\Get_Customers.cs" />
     <Compile Include="Models\Logic\Get_Orders.cs" />
+    <Compile Include="Models\Logic\Get_Product.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="ODA1Custom\Constants\GUID\OrderCT.cs" />
     <Compile Include="ODA1Custom\Constants\GUID\CustomerCT.cs" />
     <Compile Include="ODA1Custom\ContentTypes\CustomerCT.cs" />

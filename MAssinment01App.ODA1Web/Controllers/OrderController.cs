@@ -29,14 +29,19 @@ namespace MAssinment01App.ODA1Web.Controllers {
 
 		// POST: Order/Create
 		[HttpPost]
-		public ActionResult CreateOrder(FormCollection collection) {
+		public ActionResult CreateOrder(Order newOrder, string Customer, string Product) {
 			try {
-				// TODO: Add insert logic here
+				var spCtx = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+				using (var ctx = spCtx.CreateUserClientContextForSPHost()) {
 
-				return RedirectToAction("Index");
+					ctx.AddOrder(newOrder.Title, Customer, Product, newOrder.Price.ToString());
+
+					return RedirectToAction("Index", new { SPHostUrl = Request.QueryString.Get("SPHostUrl") });
+				}
 			}
-			catch {
-				return View();
+			catch (Exception e){
+				ViewBag.ErroMsg = e.Message;
+				return RedirectToAction("Index", new { SPHostUrl = Request.QueryString.Get("SPHostUrl") });
 			}
 		}
 

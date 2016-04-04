@@ -3,7 +3,8 @@
 	Add Order
 </button>
 
-@using (Html.BeginForm()) {//need to be sent to CreateOrder in Order
+
+@using (Html.BeginForm("CreateOrder", "Order", new { SPHostUrl = Request.QueryString.Get("SPHostUrl") })) {//need to be sent to CreateOrder in Order
 	@Html.AntiForgeryToken()
 	<div id="CreateOrderModel" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
@@ -26,8 +27,7 @@
 						<div class="form-group">
 							@Html.LabelFor(model => model.Product, htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-10">
-								@Html.EditorFor(model => model.Product, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Product, "", new { @class = "text-danger" })
+								@Html.DropDownList("Product", null, htmlAttributes: new { @class = "form-control" })
 							</div>
 						</div>
 
@@ -55,9 +55,9 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					@Html.ActionLink("To Order List", "Index", "Order",null, htmlAttributes: new { @class="btn btn-default"})
+					@Html.ActionLink("To Order List", "Index", "Order", null, htmlAttributes: new { @class = "btn btn-default" })
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Create</button>
+					<button type="submit" class="btn btn-primary">Create</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
